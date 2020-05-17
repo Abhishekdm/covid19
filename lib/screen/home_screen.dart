@@ -1,171 +1,173 @@
 import 'package:flutter/material.dart';
-import '../components/rounded_button.dart';
+import '../components/rounded_button_with_icon.dart';
 import '../contants.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(
-              top: 20.0,
-              right: 20.0,
-              bottom: 20.0,
-              left: 20.0,
-            ),
-            decoration: BoxDecoration(
-              color: Color(0xFF473F97),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(
+                top: 20.0,
+                right: 20.0,
+                bottom: 20.0,
+                left: 20.0,
+              ),
+              decoration: BoxDecoration(
+                color: kBackgroundColor,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(40),
+                  bottomRight: Radius.circular(40),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Covid-19',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        height: 45,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            CircleAvatar(
+                              backgroundImage:
+                                  AssetImage('images/india_flag.png'),
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black87,
+                                    fontSize: 15.0),
+                                value: "IND",
+                                items: [
+                                  DropdownMenuItem(
+                                    child: Text('USA'),
+                                    value: 'USA',
+                                  ),
+                                  DropdownMenuItem(
+                                    child: Text('IND'),
+                                    value: 'IND',
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  print(value);
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40.0,
+                  ),
+                  Text(
+                    'Are you feeling sick?',
+                    style: TextStyle(
+                      fontSize: 26.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(
+                    'If you feel sick with any of covid-19 symptoms please call or SMS us immediately for help.',
+                    style: TextStyle(
+                      fontSize: 17.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      RoundedButtonWithIcon(
+                        buttonLabel: 'Call Now',
+                        icon: Icons.phone,
+                        buttonColor: Color(0xFFFF4D58),
+                        onPressed: () {},
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      RoundedButtonWithIcon(
+                        buttonLabel: 'Send SMS',
+                        icon: Icons.sms,
+                        buttonColor: Color(0xFF4D79FF),
+                        onPressed: () {},
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Covid-19',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+            Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Prevention',
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      color: kFontColor,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      height: 45,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          CircleAvatar(
-                            backgroundImage:
-                                AssetImage('images/india_flag.png'),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black87,
-                                  fontSize: 15.0),
-                              value: "IND",
-                              items: [
-                                DropdownMenuItem(
-                                  child: Text('USA'),
-                                  value: 'USA',
-                                ),
-                                DropdownMenuItem(
-                                  child: Text('IND'),
-                                  value: 'IND',
-                                ),
-                              ],
-                              onChanged: (value) {
-                                print(value);
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 40.0,
-                ),
-                Text(
-                  'Are you feeling sick?',
-                  style: TextStyle(
-                    fontSize: 26.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Text(
-                  'If you feel sick with any of covid-19 symptoms please call or SMS us immediately for help.',
-                  style: TextStyle(
-                    fontSize: 17.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w300,
+                  SizedBox(
+                    height: 20,
                   ),
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                Row(
-                  children: <Widget>[
-                    RoundedButton(
-                      buttonLabel: 'Call Now',
-                      icon: Icons.phone,
-                      buttonColor: Color(0xFFFF4D58),
-                      onPressed: () {},
-                    ),
-                    SizedBox(
-                      width: 20.0,
-                    ),
-                    RoundedButton(
-                      buttonLabel: 'Send SMS',
-                      icon: Icons.sms,
-                      buttonColor: Color(0xFF4D79FF),
-                      onPressed: () {},
-                    )
-                  ],
-                )
-              ],
+                  Row(
+                    children: <Widget>[
+                      ImageTextColumn(
+                        imageUrl: 'images/avoid_close_contact.jpg',
+                        imageDescription: 'Avoid close contact',
+                      ),
+                      ImageTextColumn(
+                        imageUrl: 'images/wash_hands.jpg',
+                        imageDescription: 'Clean your hands often',
+                      ),
+                      ImageTextColumn(
+                        imageUrl: 'images/wear_mask.jpg',
+                        imageDescription: 'Wear a facemask',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Prevention',
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    color: kFontColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: <Widget>[
-                    ImageTextColumn(
-                      imageUrl: 'images/avoid_close_contact.jpg',
-                      imageDescription: 'Avoid close contact',
-                    ),
-                    ImageTextColumn(
-                      imageUrl: 'images/wash_hands.jpg',
-                      imageDescription: 'Clean your hands often',
-                    ),
-                    ImageTextColumn(
-                      imageUrl: 'images/wear_mask.jpg',
-                      imageDescription: 'Wear a facemask',
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Container(),
-        ],
+            Container(),
+          ],
+        ),
       ),
     );
   }
