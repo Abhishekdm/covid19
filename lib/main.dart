@@ -1,7 +1,8 @@
-import './contants.dart';
-import 'package:covid19/screen/Statistics_screen.dart';
 import 'package:flutter/material.dart';
 import './screen/home_screen.dart';
+import './screen/statistics_screen.dart';
+import './screen/info_screen.dart';
+import './contants.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +22,7 @@ class PageControl extends StatefulWidget {
 
 class _PageControlState extends State<PageControl> {
   int _selectedItem = 0;
-  var _pages = [HomeScreen(), StatisticsScreen()];
+  var _pages = [HomeScreen(), StatisticsScreen(), InfoScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
