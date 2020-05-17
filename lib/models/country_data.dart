@@ -6,7 +6,7 @@ class CountryData {
   int len;
   List<String> weekDataLabels = [];
   List<double> weekDataValues = [];
-  int a = 0;
+  List<CountryPreviousData> previousDayData = [];
 
   CountryData(dynamic countryData) {
     len = countryData.length - 1;
@@ -23,5 +23,23 @@ class CountryData {
       int temp = int.parse(countryData[len - i]['dailyconfirmed']);
       weekDataValues.add(temp.toDouble());
     }
+
+    for (int i = 0; i < 2; i++) {
+      String confirmed = countryData[len - i]['dailyconfirmed'];
+      String died = countryData[len - i]['dailydeceased'];
+      String recover = countryData[len - i]['dailyrecovered'];
+
+      previousDayData.add(CountryPreviousData(
+          dailyAffected: confirmed, dailyDeath: died, dailyRecovered: recover));
+    }
   }
+}
+
+class CountryPreviousData {
+  String dailyAffected;
+  String dailyDeath;
+  String dailyRecovered;
+
+  CountryPreviousData(
+      {this.dailyAffected, this.dailyDeath, this.dailyRecovered});
 }

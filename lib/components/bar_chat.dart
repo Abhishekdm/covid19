@@ -14,9 +14,16 @@ const fillColor = Color(0xFFFF5959);
 class BarChatState extends State<BarChat> {
   @override
   Widget build(BuildContext context) {
-    List labels = widget.labels;
-    List temp = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
-    List values = widget.values == null ? temp : widget.values;
+    List tempLabels = ['1', '2', '3', '4', '5', '6', '7'];
+    List labels = widget.labels == null ? tempLabels : widget.labels;
+    List tempValues = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+    List values = widget.values == null ? tempValues : widget.values;
+    List temp;
+    if (widget.values != null) {
+      temp = List.from(widget.values);
+      temp.sort();
+    }
+
     return AspectRatio(
       aspectRatio: 1.8,
       child: Card(
@@ -26,7 +33,7 @@ class BarChatState extends State<BarChat> {
         child: BarChart(
           BarChartData(
             alignment: BarChartAlignment.spaceAround,
-            maxY: values[0] * 1.15,
+            maxY: temp.last * 1.2,
             barTouchData: BarTouchData(
               enabled: false,
               touchTooltipData: BarTouchTooltipData(

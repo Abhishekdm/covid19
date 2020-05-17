@@ -1,9 +1,11 @@
-import '../contants.dart';
 import 'package:flutter/material.dart';
 import '../components/bar_chat.dart';
+import '../components/rounded_button.dart';
+import '../components/description_card.dart';
 import '../services/covid_data.dart';
 import '../models/country_data.dart';
 import '../models/global_data.dart';
+import '../contants.dart';
 
 class StatisticsScreen extends StatefulWidget {
   @override
@@ -16,6 +18,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   int status = 1;
   CountryData countryData;
   GlobalData globalData;
+  WeekData globalHistoricalData;
   int indiaDataLength;
   String affected = '0';
   String death = '0';
@@ -40,8 +43,11 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   }
 
   void getGlobalData() async {
-    var data = await getCovidData.globalData();
-    globalData = GlobalData(data);
+    var historicaldata = await getCovidData.globalHistoricalData();
+    globalHistoricalData = historicaldata;
+
+    var globaldata = await getCovidData.globalData();
+    globalData = GlobalData(globaldata);
   }
 
   void countryUi(CountryData data) {
@@ -56,6 +62,38 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     });
   }
 
+  void uiTodayAndYestarday(Day day) {
+    if (isCountry) {
+      if (day == Day.today) {
+        setState(() {
+          affected = countryData.previousDayData[0].dailyAffected;
+          death = countryData.previousDayData[0].dailyDeath;
+          recovered = countryData.previousDayData[0].dailyRecovered;
+        });
+      } else {
+        setState(() {
+          affected = countryData.previousDayData[1].dailyAffected;
+          death = countryData.previousDayData[1].dailyDeath;
+          recovered = countryData.previousDayData[1].dailyRecovered;
+        });
+      }
+    } else {
+      if (day == Day.today) {
+        setState(() {
+          affected = globalHistoricalData.weekDataAffected[0].toString();
+          death = globalHistoricalData.weekDataDeath[0].toString();
+          recovered = globalHistoricalData.weekDataRecovered[0].toString();
+        });
+      } else {
+        setState(() {
+          affected = globalHistoricalData.weekDataAffected[1].toString();
+          death = globalHistoricalData.weekDataDeath[1].toString();
+          recovered = globalHistoricalData.weekDataRecovered[1].toString();
+        });
+      }
+    }
+  }
+
   void globalUi(GlobalData data) {
     setState(() {
       affected = data.totalAffected;
@@ -63,6 +101,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
       recovered = data.totalRecovered;
       active = data.currentActive;
       serious = data.currentCritical;
+      graphValues = globalHistoricalData.weekDataAffected;
     });
   }
 
@@ -146,6 +185,9 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           onPressed: () {
                             setState(() {
                               status = 1;
+                              isCountry
+                                  ? countryUi(countryData)
+                                  : globalUi(globalData);
                             });
                           },
                         ),
@@ -156,6 +198,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           onPressed: () {
                             setState(() {
                               status = 2;
+                              uiTodayAndYestarday(Day.today);
                             });
                           },
                         ),
@@ -166,6 +209,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           onPressed: () {
                             setState(() {
                               status = 3;
+                              uiTodayAndYestarday(Day.yestarday);
                             });
                           },
                         ),
@@ -262,87 +306,6 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class DescriptionCard extends StatelessWidget {
-  final String titleText;
-  final String numberText;
-  final Color color;
-  final double numberTextFontSize;
-  const DescriptionCard(
-      {this.titleText,
-      this.numberText,
-      this.color,
-      this.numberTextFontSize = 24});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        height: 100,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              titleText,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Text(numberText,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: numberTextFontSize,
-                  fontWeight: FontWeight.w600,
-                )),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class RoundedButton extends StatelessWidget {
-  final String buttonLabel;
-  final Function onPressed;
-  final Color color;
-  final Color buttonColor;
-  const RoundedButton({
-    this.buttonLabel,
-    this.onPressed,
-    this.color,
-    this.buttonColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: FlatButton(
-        padding: EdgeInsets.all(12),
-        child: Text(
-          buttonLabel,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        textColor: color,
-        color: buttonColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40),
-        ),
-        onPressed: onPressed,
       ),
     );
   }
