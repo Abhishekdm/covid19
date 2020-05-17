@@ -1,6 +1,9 @@
 import '../contants.dart';
 import 'package:flutter/material.dart';
 import '../components/bar_chat.dart';
+import '../services/covid_data.dart';
+import '../models/country_data.dart';
+import '../models/global_data.dart';
 
 class StatisticsScreen extends StatefulWidget {
   @override
@@ -8,8 +11,60 @@ class StatisticsScreen extends StatefulWidget {
 }
 
 class _StatisticsScreenState extends State<StatisticsScreen> {
+  CovidData getCovidData = CovidData();
   bool isCountry = true;
   int status = 1;
+  CountryData countryData;
+  GlobalData globalData;
+  int indiaDataLength;
+  String affected = '0';
+  String death = '0';
+  String recovered = '0';
+  String active = '0';
+  String serious = '0';
+  List graphLabels;
+  List graphValues;
+
+  @override
+  void initState() {
+    super.initState();
+    getIndiaData();
+    getGlobalData();
+  }
+
+  void getIndiaData() async {
+    var data = await getCovidData.indiaHistoricalData();
+    countryData = CountryData(data);
+
+    countryUi(countryData);
+  }
+
+  void getGlobalData() async {
+    var data = await getCovidData.globalData();
+    globalData = GlobalData(data);
+  }
+
+  void countryUi(CountryData data) {
+    setState(() {
+      affected = data.totalAffected;
+      death = data.totalDeath;
+      recovered = data.totalRecovered;
+      active = data.currentActive;
+      serious = '0';
+      graphLabels = data.weekDataLabels;
+      graphValues = data.weekDataValues;
+    });
+  }
+
+  void globalUi(GlobalData data) {
+    setState(() {
+      affected = data.totalAffected;
+      death = data.totalDeath;
+      recovered = data.totalRecovered;
+      active = data.currentActive;
+      serious = data.currentCritical;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +110,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           onPressed: () {
                             setState(() {
                               isCountry = true;
+                              countryUi(countryData);
                             });
                           },
                         ),
@@ -69,6 +125,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           onPressed: () {
                             setState(() {
                               isCountry = false;
+                              globalUi(globalData);
                             });
                           },
                         ),
@@ -125,7 +182,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           children: <Widget>[
                             DescriptionCard(
                               titleText: 'Affected',
-                              numberText: '4,714,690',
+                              numberText: affected,
                               color: Color(0xFFFFB259),
                             ),
                             SizedBox(
@@ -133,7 +190,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             ),
                             DescriptionCard(
                               titleText: 'Death',
-                              numberText: '312,305',
+                              numberText: death,
                               color: Color(0xFFFF5959),
                             ),
                           ],
@@ -145,7 +202,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           children: <Widget>[
                             DescriptionCard(
                               titleText: 'Recovered',
-                              numberText: '1,809,722',
+                              numberText: recovered,
                               color: Color(0xFF4CD97B),
                               numberTextFontSize: 20.0,
                             ),
@@ -154,7 +211,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             ),
                             DescriptionCard(
                               titleText: 'Active',
-                              numberText: '2,592,663',
+                              numberText: active,
                               color: Color(0xFF4DB5FF),
                               numberTextFontSize: 20.0,
                             ),
@@ -163,7 +220,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             ),
                             DescriptionCard(
                               titleText: 'Serious',
-                              numberText: '44,841',
+                              numberText: serious,
                               color: Color(0xFF9059FF),
                               numberTextFontSize: 20.0,
                             ),
@@ -195,7 +252,10 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           fontSize: 22,
                           fontWeight: FontWeight.w500),
                     ),
-                    BarChat(),
+                    BarChat(
+                      labels: graphLabels,
+                      values: graphValues,
+                    ),
                   ],
                 ),
               ),

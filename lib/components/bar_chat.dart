@@ -2,6 +2,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class BarChat extends StatefulWidget {
+  final List labels;
+  final List values;
+  BarChat({this.labels, this.values});
   @override
   State<StatefulWidget> createState() => BarChatState();
 }
@@ -11,6 +14,9 @@ const fillColor = Color(0xFFFF5959);
 class BarChatState extends State<BarChat> {
   @override
   Widget build(BuildContext context) {
+    List labels = widget.labels;
+    List temp = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+    List values = widget.values == null ? temp : widget.values;
     return AspectRatio(
       aspectRatio: 1.8,
       child: Card(
@@ -20,7 +26,7 @@ class BarChatState extends State<BarChat> {
         child: BarChart(
           BarChartData(
             alignment: BarChartAlignment.spaceAround,
-            maxY: 5000 * 1.15,
+            maxY: values[0] * 1.15,
             barTouchData: BarTouchData(
               enabled: false,
               touchTooltipData: BarTouchTooltipData(
@@ -55,17 +61,17 @@ class BarChatState extends State<BarChat> {
                 getTitles: (double value) {
                   switch (value.toInt()) {
                     case 0:
-                      return '10 May';
+                      return labels[5];
                     case 1:
-                      return '11 May';
+                      return labels[4];
                     case 2:
-                      return '12 May';
+                      return labels[3];
                     case 3:
-                      return '13 May';
+                      return labels[2];
                     case 4:
-                      return '14 May';
+                      return labels[1];
                     case 5:
-                      return '15 May';
+                      return labels[0];
                     case 6:
                       return '16 May';
                     default:
@@ -81,27 +87,27 @@ class BarChatState extends State<BarChat> {
             barGroups: [
               BarChartGroupData(
                   x: 0,
-                  barRods: [BarChartRodData(y: 500, color: fillColor)],
+                  barRods: [BarChartRodData(y: values[5], color: fillColor)],
                   showingTooltipIndicators: [0]),
               BarChartGroupData(
                   x: 1,
-                  barRods: [BarChartRodData(y: 1000, color: fillColor)],
+                  barRods: [BarChartRodData(y: values[4], color: fillColor)],
                   showingTooltipIndicators: [0]),
               BarChartGroupData(
                   x: 2,
-                  barRods: [BarChartRodData(y: 1500, color: fillColor)],
+                  barRods: [BarChartRodData(y: values[3], color: fillColor)],
                   showingTooltipIndicators: [0]),
               BarChartGroupData(
                   x: 3,
-                  barRods: [BarChartRodData(y: 2000, color: fillColor)],
+                  barRods: [BarChartRodData(y: values[2], color: fillColor)],
                   showingTooltipIndicators: [0]),
               BarChartGroupData(
                   x: 4,
-                  barRods: [BarChartRodData(y: 2500, color: fillColor)],
+                  barRods: [BarChartRodData(y: values[1], color: fillColor)],
                   showingTooltipIndicators: [0]),
               BarChartGroupData(
                   x: 5,
-                  barRods: [BarChartRodData(y: 3000, color: fillColor)],
+                  barRods: [BarChartRodData(y: values[0], color: fillColor)],
                   showingTooltipIndicators: [0]),
             ],
           ),
