@@ -19,9 +19,11 @@ class BarChatState extends State<BarChat> {
     List tempValues = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
     List values = widget.values == null ? tempValues : widget.values;
     List temp;
+    double maxVal = 0;
     if (widget.values != null) {
       temp = List.from(widget.values);
       temp.sort();
+      maxVal = temp.last;
     }
 
     return AspectRatio(
@@ -33,7 +35,7 @@ class BarChatState extends State<BarChat> {
         child: BarChart(
           BarChartData(
             alignment: BarChartAlignment.spaceAround,
-            maxY: temp.last * 1.2,
+            maxY: maxVal * 1.35,
             barTouchData: BarTouchData(
               enabled: false,
               touchTooltipData: BarTouchTooltipData(

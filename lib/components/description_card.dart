@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../contants.dart';
 
 class DescriptionCard extends StatelessWidget {
   final String titleText;
@@ -33,7 +34,7 @@ class DescriptionCard extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            Text(numberText,
+            Text(numberText.replaceAllMapped(reg, mathFunc),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: numberTextFontSize,

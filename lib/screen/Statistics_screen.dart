@@ -35,33 +35,73 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     getGlobalData();
   }
 
+// fetching indai country data from api
   void getIndiaData() async {
     var data = await getCovidData.indiaHistoricalData();
-    countryData = CountryData(data);
-
-    countryUi(countryData);
+// error handling
+    if (data != null) {
+      countryData = CountryData(data);
+      countryUi(countryData);
+    }
   }
 
+// fetching world data from api
   void getGlobalData() async {
-    var historicaldata = await getCovidData.globalHistoricalData();
-    globalHistoricalData = historicaldata;
-
     var globaldata = await getCovidData.globalData();
-    globalData = GlobalData(globaldata);
+    // error handling
+    if (globaldata != null) {
+      globalData = GlobalData(globaldata);
+    }
+
+    var historicaldata = await getCovidData.globalHistoricalData();
+    // error handling
+    if (historicaldata != null) {
+      globalHistoricalData = historicaldata;
+    }
   }
 
-  void countryUi(CountryData data) {
+  void emptyData() {
     setState(() {
-      affected = data.totalAffected;
-      death = data.totalDeath;
-      recovered = data.totalRecovered;
-      active = data.currentActive;
+      affected = '0';
+      death = '0';
+      recovered = '0';
+      active = '0';
       serious = '0';
-      graphLabels = data.weekDataLabels;
-      graphValues = data.weekDataValues;
     });
   }
 
+// function used to build the ui for country data
+  void countryUi(CountryData data) {
+    if (data == null) {
+      emptyData();
+    } else
+      setState(() {
+        affected = data.totalAffected;
+        death = data.totalDeath;
+        recovered = data.totalRecovered;
+        active = data.currentActive;
+        serious = '0';
+        graphLabels = data.weekDataLabels;
+        graphValues = data.weekDataValues;
+      });
+  }
+
+// function used to build the ui for global data
+  void globalUi(GlobalData data) {
+    if (data == null) {
+      emptyData();
+    } else
+      setState(() {
+        affected = data.totalAffected;
+        death = data.totalDeath;
+        recovered = data.totalRecovered;
+        active = data.currentActive;
+        serious = data.currentCritical;
+        graphValues = globalHistoricalData.weekDataAffected;
+      });
+  }
+
+// function to handle today and yesterday data for country and global
   void uiTodayAndYestarday(Day day) {
     if (isCountry) {
       if (day == Day.today) {
@@ -80,29 +120,22 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     } else {
       if (day == Day.today) {
         setState(() {
-          affected = globalHistoricalData.weekDataAffected[0].toString();
-          death = globalHistoricalData.weekDataDeath[0].toString();
-          recovered = globalHistoricalData.weekDataRecovered[0].toString();
+          affected =
+              globalHistoricalData.weekDataAffected[0].toStringAsFixed(0);
+          death = globalHistoricalData.weekDataDeath[0].toStringAsFixed(0);
+          recovered =
+              globalHistoricalData.weekDataRecovered[0].toStringAsFixed(0);
         });
       } else {
         setState(() {
-          affected = globalHistoricalData.weekDataAffected[1].toString();
-          death = globalHistoricalData.weekDataDeath[1].toString();
-          recovered = globalHistoricalData.weekDataRecovered[1].toString();
+          affected =
+              globalHistoricalData.weekDataAffected[1].toStringAsFixed(0);
+          death = globalHistoricalData.weekDataDeath[1].toStringAsFixed(0);
+          recovered =
+              globalHistoricalData.weekDataRecovered[1].toStringAsFixed(0);
         });
       }
     }
-  }
-
-  void globalUi(GlobalData data) {
-    setState(() {
-      affected = data.totalAffected;
-      death = data.totalDeath;
-      recovered = data.totalRecovered;
-      active = data.currentActive;
-      serious = data.currentCritical;
-      graphValues = globalHistoricalData.weekDataAffected;
-    });
   }
 
   @override
@@ -150,6 +183,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             setState(() {
                               isCountry = true;
                               countryUi(countryData);
+                              status = 1;
                             });
                           },
                         ),
@@ -165,6 +199,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             setState(() {
                               isCountry = false;
                               globalUi(globalData);
+                              status = 1;
                             });
                           },
                         ),
