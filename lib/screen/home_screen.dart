@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/rounded_button_with_icon.dart';
+import '../components/image_text_column.dart';
 import '../contants.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -53,30 +54,15 @@ class HomeScreen extends StatelessWidget {
                             SizedBox(
                               width: 10.0,
                             ),
-                            DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black87,
-                                    fontSize: 15.0),
-                                value: "IND",
-                                items: [
-                                  DropdownMenuItem(
-                                    child: Text('USA'),
-                                    value: 'USA',
-                                  ),
-                                  DropdownMenuItem(
-                                    child: Text('IND'),
-                                    value: 'IND',
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  print(value);
-                                },
-                              ),
+                            Text(
+                              'IND',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black87,
+                                  fontSize: 15.0),
                             ),
                             SizedBox(
-                              width: 5.0,
+                              width: 10.0,
                             ),
                           ],
                         ),
@@ -84,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 40.0,
+                    height: 20.0,
                   ),
                   Text(
                     'Are you feeling sick?',
@@ -98,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                     height: 20.0,
                   ),
                   Text(
-                    'If you feel sick with any of covid-19 symptoms please call or SMS us immediately for help.',
+                    'If you feel sick with any of covid-19 symptoms please call or SMS 1075 immediately for help.',
                     style: TextStyle(
                       fontSize: 17.0,
                       color: Colors.white,
@@ -106,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 30.0,
+                    height: 20.0,
                   ),
                   Row(
                     children: <Widget>[
@@ -116,56 +102,13 @@ class HomeScreen extends StatelessWidget {
                         buttonColor: Color(0xFFFF4D58),
                         onPressed: () {},
                       ),
-                      SizedBox(
-                        width: 20.0,
-                      ),
-                      RoundedButtonWithIcon(
-                        buttonLabel: 'Send SMS',
-                        icon: Icons.sms,
-                        buttonColor: Color(0xFF4D79FF),
-                        onPressed: () {},
-                      )
                     ],
                   )
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Prevention',
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      color: kFontColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      ImageTextColumn(
-                        imageUrl: 'images/avoid_close_contact.jpg',
-                        imageDescription: 'Avoid close contact',
-                      ),
-                      ImageTextColumn(
-                        imageUrl: 'images/wash_hands.jpg',
-                        imageDescription: 'Clean your hands often',
-                      ),
-                      ImageTextColumn(
-                        imageUrl: 'images/wear_mask.jpg',
-                        imageDescription: 'Wear a facemask',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Container(),
+            _PreventionListView(),
+            _SymptomsListView()
           ],
         ),
       ),
@@ -173,30 +116,109 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class ImageTextColumn extends StatelessWidget {
-  final String imageUrl;
-  final String imageDescription;
-  const ImageTextColumn({this.imageUrl, this.imageDescription});
-
+class _SymptomsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Container(
+      padding: EdgeInsets.only(
+        left: 20,
+        right: 20,
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Image(
-            image: AssetImage(imageUrl),
-          ),
-          SizedBox(
-            height: 5,
-          ),
           Text(
-            imageDescription,
-            textAlign: TextAlign.center,
+            'Symptoms',
             style: TextStyle(
+              fontSize: 22.0,
               color: kFontColor,
-              fontSize: 16.0,
               fontWeight: FontWeight.bold,
+            ),
+          ),
+          Container(
+            height: 181,
+            child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              children: <Widget>[
+                ImageTextColumn(
+                  imageUrl: 'images/fever.png',
+                  imageDescription: 'Fever',
+                ),
+                ImageTextColumn(
+                  imageUrl: 'images/dry_cough.png',
+                  imageDescription: 'Dry Cough',
+                ),
+                ImageTextColumn(
+                  imageUrl: 'images/head_ache.png',
+                  imageDescription: 'Headache',
+                ),
+                ImageTextColumn(
+                  imageUrl: 'images/breath_less.png',
+                  imageDescription: 'Breathless',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PreventionListView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+        top: 10,
+        left: 20,
+        right: 20,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Text(
+            'Prevention',
+            style: TextStyle(
+              fontSize: 22.0,
+              color: kFontColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Container(
+            height: 180,
+            child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              children: <Widget>[
+                ImageTextColumn(
+                  imageUrl: 'images/distance.png',
+                  imageDescription: 'Avoid close contact',
+                ),
+                ImageTextColumn(
+                  imageUrl: 'images/wash_hands.png',
+                  imageDescription: 'Wash hands',
+                ),
+                ImageTextColumn(
+                  imageUrl: 'images/wear_mask.png',
+                  imageDescription: 'Wear a facemask',
+                ),
+                ImageTextColumn(
+                  imageUrl: 'images/cover_sneeze.png',
+                  imageDescription: 'Cover while sneezing',
+                ),
+                ImageTextColumn(
+                  imageUrl: 'images/sanitize.png',
+                  imageDescription: 'Sanitize all the objects frequently',
+                ),
+                ImageTextColumn(
+                  imageUrl: 'images/stay_home.png',
+                  imageDescription: 'Stay home and be safe',
+                ),
+              ],
             ),
           ),
         ],
