@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../components/rounded_button_with_icon.dart';
 import '../components/image_text_column.dart';
 import '../contants.dart';
@@ -100,7 +101,9 @@ class HomeScreen extends StatelessWidget {
                         buttonLabel: 'Call Now',
                         icon: Icons.phone,
                         buttonColor: Color(0xFFFF4D58),
-                        onPressed: () {},
+                        onPressed: () {
+                          launch("tel:1075");
+                        },
                       ),
                     ],
                   )
