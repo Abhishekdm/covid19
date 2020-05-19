@@ -27,6 +27,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   String serious = '0';
   List graphLabels;
   List graphValues;
+  DateTime now = DateTime.now();
 
   @override
   void initState() {
@@ -146,7 +147,12 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 10,
+                bottom: 20,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
@@ -249,6 +255,13 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           },
                         ),
                       ],
+                    ),
+                  ),
+                  Text(
+                    "Updated Today at 01:00 am IST ",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(
