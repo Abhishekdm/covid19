@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './screen/home_screen.dart';
 import './screen/statistics_screen.dart';
-import './screen/info_screen.dart';
+import './screen/state_wise_date_screen.dart';
 import './contants.dart';
 
 void main() => runApp(MyApp());
@@ -22,7 +22,7 @@ class PageControl extends StatefulWidget {
 
 class _PageControlState extends State<PageControl> {
   int _selectedItem = 0;
-  var _pages = [HomeScreen(), StatisticsScreen(), InfoScreen()];
+  var _pages = [HomeScreen(), StatisticsScreen(), StatewiseData()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +42,7 @@ class _PageControlState extends State<PageControl> {
             title: Text(''),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.info),
+            icon: Icon(Icons.map),
             title: Text(''),
           ),
         ],

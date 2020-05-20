@@ -277,7 +277,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             DescriptionCard(
                               titleText: 'Affected',
                               numberText: affected,
-                              color: Color(0xFFFFB259),
+                              color: kAffectedColor,
                             ),
                             SizedBox(
                               width: 20,
@@ -285,7 +285,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             DescriptionCard(
                               titleText: 'Death',
                               numberText: death,
-                              color: Color(0xFFFF5959),
+                              color: kDeathColor,
                             ),
                           ],
                         ),
@@ -297,7 +297,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             DescriptionCard(
                               titleText: 'Recovered',
                               numberText: recovered,
-                              color: Color(0xFF4CD97B),
+                              color: kRecoveredColor,
                               numberTextFontSize: 20.0,
                             ),
                             SizedBox(
@@ -306,7 +306,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             DescriptionCard(
                               titleText: 'Active',
                               numberText: active,
-                              color: Color(0xFF4DB5FF),
+                              color: kActiveColor,
                               numberTextFontSize: 20.0,
                             ),
                             SizedBox(
@@ -315,7 +315,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             DescriptionCard(
                               titleText: 'Serious',
                               numberText: serious,
-                              color: Color(0xFF9059FF),
+                              color: kSeriousColor,
                               numberTextFontSize: 20.0,
                             ),
                           ],
