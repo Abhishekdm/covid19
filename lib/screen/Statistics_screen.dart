@@ -25,6 +25,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   String recovered = '0';
   String active = '0';
   String serious = '0';
+  String lastupDated = '';
   List graphLabels;
   List graphValues;
   DateTime now = DateTime.now();
@@ -68,6 +69,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
       recovered = '0';
       active = '0';
       serious = '0';
+      lastupDated = '';
     });
   }
 
@@ -82,6 +84,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         recovered = data.totalRecovered;
         active = data.currentActive;
         serious = '0';
+        lastupDated = data.lastupDated;
         graphLabels = data.weekDataLabels;
         graphValues = data.weekDataValues;
       });
@@ -121,19 +124,18 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     } else {
       if (day == Day.today) {
         setState(() {
-          affected =
-              globalHistoricalData.weekDataAffected[0].toStringAsFixed(0);
-          death = globalHistoricalData.weekDataDeath[0].toStringAsFixed(0);
+          affected = globalData.todayAffected;
+          death = globalData.todayDeath;
           recovered =
               globalHistoricalData.weekDataRecovered[0].toStringAsFixed(0);
         });
       } else {
         setState(() {
           affected =
-              globalHistoricalData.weekDataAffected[1].toStringAsFixed(0);
-          death = globalHistoricalData.weekDataDeath[1].toStringAsFixed(0);
+              globalHistoricalData.weekDataAffected[0].toStringAsFixed(0);
+          death = globalHistoricalData.weekDataDeath[0].toStringAsFixed(0);
           recovered =
-              globalHistoricalData.weekDataRecovered[1].toStringAsFixed(0);
+              globalHistoricalData.weekDataRecovered[0].toStringAsFixed(0);
         });
       }
     }
@@ -258,7 +260,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                     ),
                   ),
                   Text(
-                    "Updated Today at 01:00 am IST ",
+                    "Updated at $lastupDated ",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,

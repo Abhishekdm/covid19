@@ -3,35 +3,41 @@ class CountryData {
   String totalDeath;
   String totalRecovered;
   String currentActive;
+  String lastupDated;
   int len;
   List<String> weekDataLabels = [];
   List<double> weekDataValues = [];
   List<CountryPreviousData> previousDayData = [];
 
-  CountryData(dynamic countryData) {
-    len = countryData.length - 1;
-    totalAffected = countryData[len]['totalconfirmed'];
-    totalDeath = countryData[len]['totaldeceased'];
-    totalRecovered = countryData[len]['totalrecovered'];
-    int temp = (int.parse(totalAffected) -
-        int.parse(totalDeath) -
-        int.parse(totalRecovered));
-    currentActive = temp.toString();
+  CountryData(dynamic data) {
+    dynamic countryDataTimeSeries = data['cases_time_series'];
+    len = countryDataTimeSeries.length - 1;
+    dynamic countryDataStateWise = data['statewise'];
 
+    totalAffected = countryDataStateWise[0]['confirmed'];
+    totalDeath = countryDataStateWise[0]['deaths'];
+    totalRecovered = countryDataStateWise[0]['recovered'];
+    currentActive = countryDataStateWise[0]['active'];
+    lastupDated = countryDataStateWise[0]['lastupdatedtime'];
+
+    // creating a list of active values to plot graph
     for (int i = 0; i < 6; i++) {
-      weekDataLabels.add(countryData[len - i]['date']);
-      int temp = int.parse(countryData[len - i]['dailyconfirmed']);
+      weekDataLabels.add(countryDataTimeSeries[len - i]['date']);
+      int temp = int.parse(countryDataTimeSeries[len - i]['dailyconfirmed']);
       weekDataValues.add(temp.toDouble());
     }
 
-    for (int i = 0; i < 2; i++) {
-      String confirmed = countryData[len - i]['dailyconfirmed'];
-      String died = countryData[len - i]['dailydeceased'];
-      String recover = countryData[len - i]['dailyrecovered'];
-
-      previousDayData.add(CountryPreviousData(
-          dailyAffected: confirmed, dailyDeath: died, dailyRecovered: recover));
-    }
+    // previous day data
+    previousDayData.add(CountryPreviousData(
+      dailyAffected: countryDataStateWise[0]['deltaconfirmed'],
+      dailyRecovered: countryDataStateWise[0]['deltarecovered'],
+      dailyDeath: countryDataStateWise[0]['deltadeaths'],
+    ));
+    previousDayData.add(CountryPreviousData(
+      dailyAffected: countryDataTimeSeries[len]['dailyconfirmed'],
+      dailyRecovered: countryDataTimeSeries[len]['dailyrecovered'],
+      dailyDeath: countryDataTimeSeries[len]['dailydeceased'],
+    ));
   }
 }
 

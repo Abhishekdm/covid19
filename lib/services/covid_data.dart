@@ -2,8 +2,10 @@ import './networking.dart';
 
 const indiaDataHistoricalURL = 'https://api.covid19india.org/data.json';
 
-const globalDataURL =
-    'https://corona-virus-stats.herokuapp.com/api/v1/cases/general-stats';
+// const globalDataURL =
+//     'https://corona-virus-stats.herokuapp.com/api/v1/cases/general-stats';
+
+const globalDataURL = 'https://corona.lmao.ninja/v2/all';
 
 const globalDataHistoricalURL =
     'https://disease.sh/v2/historical/all?lastdays=10';
@@ -16,7 +18,7 @@ class CovidData {
       NetworkHelper networkHelper = NetworkHelper(url: indiaDataHistoricalURL);
 
       var indiaData = await networkHelper.getData();
-      return indiaData['cases_time_series'];
+      return indiaData;
     } catch (e) {
       print(e);
     }
@@ -27,7 +29,8 @@ class CovidData {
       NetworkHelper networkHelper = NetworkHelper(url: globalDataURL);
 
       var globalData = await networkHelper.getData();
-      return globalData['data'];
+      // return globalData['data'];
+      return globalData;
     } catch (e) {
       print(e);
     }
@@ -41,12 +44,16 @@ class CovidData {
       List<double> weekDataRecovered = [];
 
       var globalHistoricalData = await networkHelper.getData();
+
+      // segregating data and reversing it
       List cases = globalHistoricalData['cases'].values.toList();
       cases = cases.reversed.toList();
       List deaths = globalHistoricalData['deaths'].values.toList();
       deaths = deaths.reversed.toList();
       List recovered = globalHistoricalData['recovered'].values.toList();
       recovered = recovered.reversed.toList();
+
+      // creating a list of data by subtracting
       for (int i = 0; i < cases.length - 1; i++) {
         int c = (cases[i] - cases[i + 1]);
         weekDataAffected.add(c.toDouble());
@@ -57,6 +64,7 @@ class CovidData {
         int r = (recovered[i] - recovered[i + 1]);
         weekDataRecovered.add(r.toDouble());
       }
+
       return WeekData(
           weekDataAffected: weekDataAffected,
           weekDataDeath: weekDataDeath,
