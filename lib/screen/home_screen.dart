@@ -9,112 +9,126 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(
-                top: 20.0,
-                right: 20.0,
-                bottom: 20.0,
-                left: 20.0,
-              ),
-              decoration: BoxDecoration(
-                color: kBackgroundColor,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(40),
-                  bottomRight: Radius.circular(40),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        'Covid-19',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            CircleAvatar(
-                              backgroundImage:
-                                  AssetImage('images/india_flag.png'),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Text(
-                              'IND',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black87,
-                                  fontSize: 15.0),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Text(
-                    'Are you feeling sick?',
-                    style: TextStyle(
-                      fontSize: 26.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Text(
-                    'If you feel sick with any of covid-19 symptoms please call or SMS 1075 immediately for help.',
-                    style: TextStyle(
-                      fontSize: 17.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      RoundedButtonWithIcon(
-                        buttonLabel: 'Call Now',
-                        icon: Icons.phone,
-                        buttonColor: Color(0xFFFF4D58),
-                        onPressed: () {
-                          launch("tel:1075");
-                        },
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            _PreventionListView(),
-            _SymptomsListView()
+            _MainPart(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MainPart extends StatelessWidget {
+  const _MainPart({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(
+            top: 20.0,
+            right: 20.0,
+            bottom: 20.0,
+            left: 20.0,
+          ),
+          decoration: BoxDecoration(
+            color: kBackgroundColor,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(40),
+              bottomRight: Radius.circular(40),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Covid-19',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    height: 45,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        CircleAvatar(
+                          backgroundImage: AssetImage('images/india_flag.png'),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(
+                          'IND',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black87,
+                              fontSize: 15.0),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                'Are you feeling sick?',
+                style: TextStyle(
+                  fontSize: 26.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                'If you feel sick with any of covid-19 symptoms please call or SMS 1075 immediately for help.',
+                style: TextStyle(
+                  fontSize: 17.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                children: <Widget>[
+                  RoundedButtonWithIcon(
+                    buttonLabel: 'Call Now',
+                    icon: Icons.phone,
+                    buttonColor: Color(0xFFFF4D58),
+                    onPressed: () {
+                      launch("tel:1075");
+                    },
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+        _PreventionListView(),
+        _SymptomsListView()
+      ],
     );
   }
 }

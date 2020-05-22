@@ -146,213 +146,222 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20,
-                right: 20,
-                top: 10,
-                bottom: 20,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Text(
-                    'Statistics',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+            Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    top: 10,
+                    bottom: 20,
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      left: 5,
-                      right: 5,
-                      top: 2,
-                      bottom: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: Color(0x30FFFFFF),
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        RoundedButton(
-                          buttonLabel: 'My Country',
-                          color: isCountry ? kFontColor : Color(0xFFFFFFFF),
-                          buttonColor:
-                              isCountry ? Color(0xFFFFFFFF) : Color(0x00FFFFFF),
-                          onPressed: () {
-                            setState(() {
-                              isCountry = true;
-                              countryUi(countryData);
-                              status = 1;
-                            });
-                          },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text(
+                        'Statistics',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(
-                          width: 10,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                          left: 5,
+                          right: 5,
+                          top: 2,
+                          bottom: 2,
                         ),
-                        RoundedButton(
-                          buttonLabel: 'Global',
-                          color: isCountry ? Color(0xFFFFFFFF) : kFontColor,
-                          buttonColor:
-                              isCountry ? Color(0x00FFFFFF) : Color(0xFFFFFFFF),
-                          onPressed: () {
-                            setState(() {
-                              isCountry = false;
-                              globalUi(globalData);
-                              status = 1;
-                            });
-                          },
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Color(0x30FFFFFF),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        FlatButton(
-                          child: Text('Total'),
-                          textColor:
-                              status == 1 ? Colors.white : Colors.white60,
-                          onPressed: () {
-                            setState(() {
-                              status = 1;
-                              isCountry
-                                  ? countryUi(countryData)
-                                  : globalUi(globalData);
-                            });
-                          },
-                        ),
-                        FlatButton(
-                          child: Text('Today'),
-                          textColor:
-                              status == 2 ? Colors.white : Colors.white60,
-                          onPressed: () {
-                            setState(() {
-                              status = 2;
-                              uiTodayAndYestarday(Day.today);
-                            });
-                          },
-                        ),
-                        FlatButton(
-                          child: Text('Yestarday'),
-                          textColor:
-                              status == 3 ? Colors.white : Colors.white60,
-                          onPressed: () {
-                            setState(() {
-                              status = 3;
-                              uiTodayAndYestarday(Day.yestarday);
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    "Updated at $lastupDated ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    child: Column(
-                      children: <Widget>[
-                        Row(
+                        child: Row(
                           children: <Widget>[
-                            DescriptionCard(
-                              titleText: 'Affected',
-                              numberText: affected,
-                              color: kAffectedColor,
+                            RoundedButton(
+                              buttonLabel: 'My Country',
+                              color: isCountry ? kFontColor : Color(0xFFFFFFFF),
+                              buttonColor: isCountry
+                                  ? Color(0xFFFFFFFF)
+                                  : Color(0x00FFFFFF),
+                              onPressed: () {
+                                setState(() {
+                                  isCountry = true;
+                                  countryUi(countryData);
+                                  status = 1;
+                                });
+                              },
                             ),
                             SizedBox(
-                              width: 20,
+                              width: 10,
                             ),
-                            DescriptionCard(
-                              titleText: 'Death',
-                              numberText: death,
-                              color: kDeathColor,
+                            RoundedButton(
+                              buttonLabel: 'Global',
+                              color: isCountry ? Color(0xFFFFFFFF) : kFontColor,
+                              buttonColor: isCountry
+                                  ? Color(0x00FFFFFF)
+                                  : Color(0xFFFFFFFF),
+                              onPressed: () {
+                                setState(() {
+                                  isCountry = false;
+                                  globalUi(globalData);
+                                  status = 1;
+                                });
+                              },
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            DescriptionCard(
-                              titleText: 'Recovered',
-                              numberText: recovered,
-                              color: kRecoveredColor,
-                              numberTextFontSize: 20.0,
+                            FlatButton(
+                              child: Text('Total'),
+                              textColor:
+                                  status == 1 ? Colors.white : Colors.white60,
+                              onPressed: () {
+                                setState(() {
+                                  status = 1;
+                                  isCountry
+                                      ? countryUi(countryData)
+                                      : globalUi(globalData);
+                                });
+                              },
                             ),
-                            SizedBox(
-                              width: 20,
+                            FlatButton(
+                              child: Text('Today'),
+                              textColor:
+                                  status == 2 ? Colors.white : Colors.white60,
+                              onPressed: () {
+                                setState(() {
+                                  status = 2;
+                                  uiTodayAndYestarday(Day.today);
+                                });
+                              },
                             ),
-                            DescriptionCard(
-                              titleText: 'Active',
-                              numberText: active,
-                              color: kActiveColor,
-                              numberTextFontSize: 20.0,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            DescriptionCard(
-                              titleText: 'Serious',
-                              numberText: serious,
-                              color: kSeriousColor,
-                              numberTextFontSize: 20.0,
+                            FlatButton(
+                              child: Text('Yestarday'),
+                              textColor:
+                                  status == 3 ? Colors.white : Colors.white60,
+                              onPressed: () {
+                                setState(() {
+                                  status = 3;
+                                  uiTodayAndYestarday(Day.yestarday);
+                                });
+                              },
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
+                      ),
+                      Text(
+                        "Updated at $lastupDated ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                DescriptionCard(
+                                  titleText: 'Affected',
+                                  numberText: affected,
+                                  color: kAffectedColor,
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                DescriptionCard(
+                                  titleText: 'Death',
+                                  numberText: death,
+                                  color: kDeathColor,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: <Widget>[
+                                DescriptionCard(
+                                  titleText: 'Recovered',
+                                  numberText: recovered,
+                                  color: kRecoveredColor,
+                                  numberTextFontSize: 20.0,
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                DescriptionCard(
+                                  titleText: 'Active',
+                                  numberText: active,
+                                  color: kActiveColor,
+                                  numberTextFontSize: 20.0,
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                DescriptionCard(
+                                  titleText: 'Serious',
+                                  numberText: serious,
+                                  color: kSeriousColor,
+                                  numberTextFontSize: 20.0,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Text(
-                      'Daily New Cases',
-                      style: TextStyle(
-                          color: kFontColor,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500),
+                Container(
+                  padding: EdgeInsets.only(
+                    top: 20,
+                    bottom: 22,
+                    left: 20,
+                    right: 20,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
                     ),
-                    BarChat(
-                      labels: graphLabels,
-                      values: graphValues,
-                    ),
-                  ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text(
+                        'Daily New Cases',
+                        style: TextStyle(
+                            color: kFontColor,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      BarChat(
+                        labels: graphLabels,
+                        values: graphValues,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),

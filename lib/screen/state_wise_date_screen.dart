@@ -105,16 +105,13 @@ class _TitleTextLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        label,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: color,
-          fontSize: 17,
-          fontWeight: FontWeight.bold,
-        ),
+    return Text(
+      label,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: color,
+        fontSize: 17,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
