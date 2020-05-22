@@ -20,7 +20,8 @@ class _StatewiseDataState extends State<StatewiseData> {
       listBuilderStateDate = data['statewise'];
 
       // removing data at index 17 because it has no value
-      listBuilderStateDate.removeAt(17);
+      listBuilderStateDate
+          .removeWhere((element) => element['state'] == 'State Unassigned');
       setState(() {
         stateDataLength = listBuilderStateDate.length - 1;
       });
