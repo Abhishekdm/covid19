@@ -340,8 +340,8 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
                     ),
                   ),
                   child: Column(
@@ -349,6 +349,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                     children: <Widget>[
                       Text(
                         'Daily New Cases',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: kFontColor,
                             fontSize: 22,

@@ -38,8 +38,8 @@ class _MainPart extends StatelessWidget {
           decoration: BoxDecoration(
             color: kBackgroundColor,
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(40),
+              bottomLeft: Radius.circular(15),
+              bottomRight: Radius.circular(15),
             ),
           ),
           child: Column(
@@ -229,7 +229,7 @@ class _PreventionListView extends StatelessWidget {
                 ),
                 ImageTextColumn(
                   imageUrl: 'images/sanitize.png',
-                  imageDescription: 'Sanitize all the objects frequently',
+                  imageDescription: 'Sanitize all objects',
                 ),
                 ImageTextColumn(
                   imageUrl: 'images/stay_home.png',

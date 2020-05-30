@@ -28,7 +28,7 @@ class _PageControlState extends State<PageControl> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        title: Text('Welcome'),
+        title: Text('Welcome!'),
       ),
       body: _pages[_selectedItem],
       bottomNavigationBar: BottomNavigationBar(

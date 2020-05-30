@@ -17,22 +17,25 @@ class RoundedButtonWithIcon extends StatelessWidget {
     return Expanded(
       child: FlatButton(
         textColor: Colors.white,
-        padding: EdgeInsets.all(13.0),
+        padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.0),
+          borderRadius: BorderRadius.circular(10.0),
         ),
         color: buttonColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(icon),
+            Icon(
+              icon,
+              size: 22,
+            ),
             SizedBox(
               width: 10,
             ),
             Text(
               buttonLabel,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -48,7 +48,7 @@ class _StatewiseDataState extends State<StatewiseData> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text(
-              'StateWise Data',
+              'Statewise Data',
               style: TextStyle(
                 color: kFontColor,
                 fontSize: 30.0,
