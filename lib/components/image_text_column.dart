@@ -18,8 +18,10 @@ class ImageTextColumn extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image(
-            image: AssetImage(imageUrl),
+          Expanded(
+            child: Image(
+              image: AssetImage(imageUrl),
+            ),
           ),
           SizedBox(
             height: 5,

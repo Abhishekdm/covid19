@@ -29,21 +29,22 @@ class ListViewItemCard extends StatelessWidget {
             _CardTextLabel(
               label: state,
               flex: 2,
+              textAlign: TextAlign.start,
             ),
             _CardTextLabel(
-              label: active,
+              label: active.replaceAllMapped(reg, mathFunc),
               color: kActiveColor,
             ),
             _CardTextLabel(
-              label: death,
+              label: death.replaceAllMapped(reg, mathFunc),
               color: kDeathColor,
             ),
             _CardTextLabel(
-              label: recovered,
+              label: recovered.replaceAllMapped(reg, mathFunc),
               color: kRecoveredColor,
             ),
             _CardTextLabel(
-              label: total,
+              label: total.replaceAllMapped(reg, mathFunc),
               color: kAffectedColor,
             ),
           ],
@@ -57,7 +58,13 @@ class _CardTextLabel extends StatelessWidget {
   final String label;
   final Color color;
   final int flex;
-  const _CardTextLabel({this.label, this.color = Colors.white, this.flex = 1});
+  final TextAlign textAlign;
+  const _CardTextLabel({
+    this.label,
+    this.color = Colors.white,
+    this.flex = 1,
+    this.textAlign = TextAlign.center,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +72,7 @@ class _CardTextLabel extends StatelessWidget {
       flex: flex,
       child: Text(
         label,
-        textAlign: TextAlign.start,
+        textAlign: textAlign,
         style: TextStyle(
           color: color,
           fontSize: 14,

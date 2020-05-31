@@ -68,7 +68,11 @@ class _StatewiseDataState extends State<StatewiseData> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    _TitleTextLabel(label: 'State'),
+                    _TitleTextLabel(
+                      label: 'State',
+                      flex: 2,
+                      textAlign: TextAlign.start,
+                    ),
                     _TitleTextLabel(label: 'Active'),
                     _TitleTextLabel(label: 'Death'),
                     _TitleTextLabel(label: 'Recover'),
@@ -102,17 +106,27 @@ class _StatewiseDataState extends State<StatewiseData> {
 class _TitleTextLabel extends StatelessWidget {
   final String label;
   final Color color;
-  const _TitleTextLabel({this.label, this.color = Colors.white});
+  final int flex;
+  final TextAlign textAlign;
+  const _TitleTextLabel({
+    this.label,
+    this.color = Colors.white,
+    this.flex = 1,
+    this.textAlign = TextAlign.center,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      label,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: color,
-        fontSize: 17,
-        fontWeight: FontWeight.bold,
+    return Expanded(
+      flex: flex,
+      child: Text(
+        label,
+        textAlign: textAlign,
+        style: TextStyle(
+          color: color,
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
