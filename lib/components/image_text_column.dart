@@ -1,3 +1,4 @@
+import 'package:covid19/contants.dart';
 import 'package:flutter/material.dart';
 
 class ImageTextColumn extends StatelessWidget {
@@ -12,7 +13,7 @@ class ImageTextColumn extends StatelessWidget {
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Color(0xFF473F97),
+        color: kBackgroundColor,
       ),
       width: 105,
       child: Column(

@@ -18,7 +18,7 @@ class ListViewItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: kBackgroundColor,
+      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -30,6 +30,7 @@ class ListViewItemCard extends StatelessWidget {
               label: state,
               flex: 2,
               textAlign: TextAlign.start,
+              color: kFontColor,
             ),
             _CardTextLabel(
               label: active.replaceAllMapped(reg, mathFunc),

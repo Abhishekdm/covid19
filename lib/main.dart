@@ -27,7 +27,7 @@ class _PageControlState extends State<PageControl> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kBackgroundColor,
+        backgroundColor: kAppBarColor,
         title: Text('Welcome!'),
       ),
       body: _pages[_selectedItem],
@@ -46,6 +46,7 @@ class _PageControlState extends State<PageControl> {
             title: Text(''),
           ),
         ],
+        selectedItemColor: kAppBarColor,
         currentIndex: _selectedItem,
         onTap: (index) {
           setState(() {

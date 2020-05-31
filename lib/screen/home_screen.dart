@@ -92,7 +92,7 @@ class _MainPart extends StatelessWidget {
               Text(
                 'Are you feeling sick?',
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize: 25.0,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -101,7 +101,7 @@ class _MainPart extends StatelessWidget {
                 height: 20.0,
               ),
               Text(
-                'If you feel sick with any of covid-19 symptoms please call or SMS 1075 immediately for help.',
+                'If you feel sick with any of the covid-19 symptoms please call or SMS 1075 immediately for help.',
                 style: TextStyle(
                   fontSize: 17.0,
                   color: Colors.white,

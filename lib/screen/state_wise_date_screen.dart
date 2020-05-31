@@ -37,6 +37,7 @@ class _StatewiseDataState extends State<StatewiseData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackgroundColor,
       body: Container(
         padding: const EdgeInsets.only(
           left: 20,
@@ -47,38 +48,42 @@ class _StatewiseDataState extends State<StatewiseData> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(
-              'Statewise Data',
-              style: TextStyle(
-                color: kFontColor,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
+            Container(
+              margin: EdgeInsets.only(
+                left: 4,
+              ),
+              child: Text(
+                'Statewise Data',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 26.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             SizedBox(
               height: 15,
             ),
-            Card(
-              color: kBackgroundColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    _TitleTextLabel(
-                      label: 'State',
-                      flex: 2,
-                      textAlign: TextAlign.start,
-                    ),
-                    _TitleTextLabel(label: 'Active'),
-                    _TitleTextLabel(label: 'Death'),
-                    _TitleTextLabel(label: 'Recover'),
-                    _TitleTextLabel(label: 'Total'),
-                  ],
-                ),
+            Container(
+              child: Row(
+                children: <Widget>[
+                  _ContainerWithColorFillAndText(
+                    iconFillColor: kActiveColor,
+                    labelText: 'Active',
+                  ),
+                  _ContainerWithColorFillAndText(
+                    iconFillColor: kDeathColor,
+                    labelText: 'Death',
+                  ),
+                  _ContainerWithColorFillAndText(
+                    iconFillColor: kRecoveredColor,
+                    labelText: 'Recovered',
+                  ),
+                  _ContainerWithColorFillAndText(
+                    iconFillColor: kAffectedColor,
+                    labelText: 'Total',
+                  ),
+                ],
               ),
             ),
             Expanded(
@@ -103,31 +108,67 @@ class _StatewiseDataState extends State<StatewiseData> {
   }
 }
 
-class _TitleTextLabel extends StatelessWidget {
-  final String label;
-  final Color color;
-  final int flex;
-  final TextAlign textAlign;
-  const _TitleTextLabel({
-    this.label,
-    this.color = Colors.white,
-    this.flex = 1,
-    this.textAlign = TextAlign.center,
+class _ContainerWithColorFillAndText extends StatelessWidget {
+  final Color iconFillColor;
+  final String labelText;
+  const _ContainerWithColorFillAndText({
+    this.iconFillColor = Colors.black,
+    this.labelText = '',
   });
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: flex,
-      child: Text(
-        label,
-        textAlign: textAlign,
-        style: TextStyle(
-          color: color,
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
+    return Container(
+      padding: EdgeInsets.all(5),
+      child: Row(
+        children: <Widget>[
+          Container(
+            height: 20,
+            width: 20,
+            decoration: BoxDecoration(
+              color: iconFillColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            labelText,
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+        ],
       ),
     );
   }
 }
+
+// class _TitleTextLabel extends StatelessWidget {
+//   final String label;
+//   final Color color;
+//   final int flex;
+//   final TextAlign textAlign;
+//   const _TitleTextLabel({
+//     this.label,
+//     this.color = Colors.white,
+//     this.flex = 1,
+//     this.textAlign = TextAlign.center,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//       flex: flex,
+//       child: Text(
+//         label,
+//         textAlign: textAlign,
+//         style: TextStyle(
+//           color: color,
+//           fontSize: 15,
+//           fontWeight: FontWeight.bold,
+//         ),
+//       ),
+//     );
+//   }
+// }

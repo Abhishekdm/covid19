@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 enum Day { today, yestarday }
 
+const kAppBarColor = Color(0xff473F97);
 const kFontColor = Color(0xff0D1333);
-const kBackgroundColor = Color(0xFF473F97);
+const kBackgroundColor = Color(0xFF352F71);
 const kAffectedColor = Color(0xFFFFB259);
 const kDeathColor = Color(0xFFFF5959);
 const kRecoveredColor = Color(0xFF4CD97B);

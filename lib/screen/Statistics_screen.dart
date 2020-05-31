@@ -164,7 +164,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                         'Statistics',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 30.0,
+                          fontSize: 25.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -329,6 +329,9 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 6,
                 ),
                 Container(
                   padding: EdgeInsets.only(
