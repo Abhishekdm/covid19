@@ -1,16 +1,13 @@
 # covid19
 
-A new Flutter project.
+An Elegant android app to get live status of covid-19. Built using Flutter and Provider.
 
-## Getting Started
+## Screenshots
+### Homepage
+<img src="https://user-images.githubusercontent.com/22396053/100108502-dba31b00-2e90-11eb-99b8-68f2cda19812.jpg" width="300">
 
-This project is a starting point for a Flutter application.
+### Statistics
+<img src="https://user-images.githubusercontent.com/22396053/100108686-0ee5aa00-2e91-11eb-8fa0-1b7f7549c877.jpg" width="300">
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Statewise Data
+<img src="https://user-images.githubusercontent.com/22396053/100108502-dba31b00-2e90-11eb-99b8-68f2cda19812.jpg" width="300">
