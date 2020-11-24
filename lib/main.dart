@@ -35,15 +35,15 @@ class _PageControlState extends State<PageControl> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text(''),
+            label: "",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.assessment),
-            title: Text(''),
+            label: "",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
-            title: Text(''),
+            label: "",
           ),
         ],
         selectedItemColor: kAppBarColor,

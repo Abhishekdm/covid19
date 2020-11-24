@@ -25,7 +25,6 @@ class BarChatState extends State<BarChat> {
       temp.sort();
       maxVal = temp.last;
     }
-
     return AspectRatio(
       aspectRatio: 1.8,
       child: Card(
@@ -70,17 +69,17 @@ class BarChatState extends State<BarChat> {
                 getTitles: (double value) {
                   switch (value.toInt()) {
                     case 0:
-                      return labels[5];
+                      return "${labels[5].split(" ")[0]} ${labels[5].split(" ")[1].substring(0, 3)}";
                     case 1:
-                      return labels[4];
+                      return "${labels[4].split(" ")[0]} ${labels[4].split(" ")[1].substring(0, 3)}";
                     case 2:
-                      return labels[3];
+                      return "${labels[3].split(" ")[0]} ${labels[3].split(" ")[1].substring(0, 3)}";
                     case 3:
-                      return labels[2];
+                      return "${labels[2].split(" ")[0]} ${labels[2].split(" ")[1].substring(0, 3)}";
                     case 4:
-                      return labels[1];
+                      return "${labels[1].split(" ")[0]} ${labels[1].split(" ")[1].substring(0, 3)}";
                     case 5:
-                      return labels[0];
+                      return "${labels[0].split(" ")[0]} ${labels[0].split(" ")[1].substring(0, 3)}";
                     case 6:
                       return '16 May';
                     default:
